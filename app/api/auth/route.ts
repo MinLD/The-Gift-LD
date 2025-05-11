@@ -53,17 +53,3 @@ export const DELETE = async () => {
     }
   );
 };
-
-export const profileUser = async () => {
-  const cookie = await cookies();
-  const sessionToken = cookie.get("sessionToken")?.value;
-
-  if (!sessionToken) {
-    return Response.json(
-      { message: "No session token found" },
-      { status: 401 }
-    );
-  }
-
-  return Response.json({ token: sessionToken }, { status: 200 });
-};

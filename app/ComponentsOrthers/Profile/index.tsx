@@ -1,9 +1,9 @@
 "use client";
 import AddressEdit from "@/app/ComponentsOrthers/AddressEdit";
-import InputBox from "@/app/ComponentsOrthers/InputBox";
+
 import ProfileEdit from "@/app/ComponentsOrthers/ProfileEdit";
 import { useProfileStore } from "@/app/zustand/store";
-import { CircleAlert, Pencil, X } from "lucide-react";
+import { CircleAlert, Pencil } from "lucide-react";
 import { useState } from "react";
 
 function Profile() {

@@ -41,7 +41,7 @@ function ProfileEdit({
       dob: dob || "",
       gender: gender || "",
     });
-  }, [fullName, phone, email]);
+  }, [fullName, phone, email, dob, gender]);
 
   const handleChange = (name: string, value: string) => {
     setFormData((prev) => ({
@@ -164,7 +164,7 @@ function ProfileEdit({
             </p>
             {input.name === "email" && (
               <p className="text-gray-500 text-[12px]">
-                Email used for login can't be changed
+                Email used for login can&apos;t be changed
               </p>
             )}
           </div>

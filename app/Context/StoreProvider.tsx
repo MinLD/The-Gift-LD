@@ -17,6 +17,8 @@ type ContextType = {
 
   IsOpenMenu: boolean;
   setIsOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+
+  clearVerifyState: () => void;
 };
 
 type Props = {
@@ -70,6 +72,7 @@ export function StoreProvider({ children }: Props) {
         setEmailVerify,
         IsOpenMenu,
         setIsOpenMenu,
+        clearVerifyState,
       }}
     >
       {children}

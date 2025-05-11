@@ -1,6 +1,6 @@
 // Carousel.tsx
 import { useEffect, useState } from "react";
-import Image from "next/image";
+
 import { ChevronLeft } from "lucide-react";
 
 type Props = {

@@ -1,5 +1,5 @@
 "use client";
-import { useProfileStore } from "@/app/zustand/store";
+
 
 function OrthersPage() {
   return (

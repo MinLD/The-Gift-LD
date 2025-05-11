@@ -40,12 +40,13 @@ function Verify({ email }: Props) {
     try {
       const res: any = await sendCode(email);
 
-      if (res.code === 1000) {
+      if (res?.code === 1000) {
         toast.success("Code has been sent again.");
       } else {
-        toast.error(res.message);
+        toast.error(res?.message);
       }
     } catch (err) {
+      console.log(err);
       toast.error("Something went wrong. Please try again.");
     }
   };

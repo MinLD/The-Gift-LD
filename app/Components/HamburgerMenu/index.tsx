@@ -9,6 +9,7 @@ import {
 
 import { useStateStore } from "@/app/Context/StoreProvider";
 import { useEffect } from "react";
+import Image from "next/image";
 function HamburgerMenu() {
   const { IsOpenMenu, setIsOpenMenu } = useStateStore();
   const router = useRouter();
@@ -48,7 +49,7 @@ function HamburgerMenu() {
                 router.push("/");
               }}
             >
-              <img
+              <Image
                 className="LTODq"
                 width="112"
                 height="59"
@@ -88,9 +89,9 @@ function HamburgerMenu() {
             <h2 className="text-lg font-bold mt-2 text-[#272727]">Danh mục</h2>
 
             <div className="overflow-y-scroll  max-h-[400px]">
-              {DataHeaderBottom.map((item) => (
+              {DataHeaderBottom.map((item, k) => (
                 <div
-                  key={item.id}
+                  key={k}
                   className="w-full h-[50px] bg-[#f5f5f5] mt-5 rounded-3xl"
                 >
                   <p className="w-full h-full flex items-center justify-center gap-2">
@@ -102,7 +103,7 @@ function HamburgerMenu() {
 
             <div className="flex gap-10 items-center justify-center mt-2">
               {DataIcons.map((item) => (
-                <div>
+                <div key={item.id}>
                   <item.name size={25} strokeWidth={2.25} />
                 </div>
               ))}

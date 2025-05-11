@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { AuthContext } from "@/app/Context/AuthProvider";
 import { SetCookie } from "@/app/Service/ServerComponents";
-import { myInfo } from "@/app/Service/User";
+
 import { useProfileStore } from "@/app/zustand/store";
 
 type Props = {
@@ -61,7 +61,7 @@ function SignIn({ isType = "login" }: Props) {
       placeholder: "Full Name",
     },
   ];
-  const { User, error, fetchProfile, isLoadingg } = useProfileStore();
+  const { User, fetchProfile } = useProfileStore();
   const [isLoading, setIsLoading] = useState(false);
   const authcontext = useContext(AuthContext);
   if (!authcontext) {
@@ -153,8 +153,8 @@ function SignIn({ isType = "login" }: Props) {
             router.push("/Authentication/Verify/" + values.email);
           })
           .catch((err) => {
-            if (err.response?.data?.code === 1001) {
-              toast.error(err.response?.data?.message);
+            if (err?.response?.data?.code === 1001) {
+              toast.error(err?.response?.data?.message);
               setIsLoading(false);
               return;
             }

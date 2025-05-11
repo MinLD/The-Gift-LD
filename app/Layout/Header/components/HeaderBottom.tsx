@@ -8,10 +8,11 @@ import MyLayOut from "@/app/MyLayout/layout";
 
 import logo from "@/public/logo2.png";
 import { Menu, Search } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 function HeaderBottom() {
-  const { IsOpenMenu, setIsOpenMenu } = useStateStore();
+  const { setIsOpenMenu } = useStateStore();
   const router = useRouter();
 
   const handlePushRouter = (name: number) => {
@@ -38,7 +39,7 @@ function HeaderBottom() {
             <Menu size={32} strokeWidth={2.25} />
           </div>
           <div className="flex items-center justify-center w-[100px] h-[70px]">
-            <img src={logo.src} alt="logo" className="w-[60px] h-[45px]" />
+            <Image src={logo.src} alt="logo" className="w-[60px] h-[45px]" />
           </div>
           <div className="flex gap-5 items-center">
             <div className="xl:flex gap-5 items-center hidden">

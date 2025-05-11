@@ -1,10 +1,11 @@
 "use client";
 import { DeleteCookie } from "@/app/Service/ServerComponents";
 import { useProfileStore } from "@/app/zustand/store";
-import { ChevronDown, ChevronUp, CircleUserRound, Cookie } from "lucide-react";
+import { ChevronDown, ChevronUp, CircleUserRound } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 function HeaderOrthers() {
   const data = [
@@ -49,7 +50,7 @@ function HeaderOrthers() {
                 router.push("/");
               }}
             >
-              <img
+              <Image
                 className="LTODq"
                 width="112"
                 height="59"

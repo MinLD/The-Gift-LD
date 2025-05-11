@@ -4,7 +4,7 @@ import {
   useContext,
   useState,
   ReactNode,
-  useEffect,
+
 } from "react";
 
 type ContextType = {

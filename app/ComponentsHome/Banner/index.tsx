@@ -1,9 +1,7 @@
 "use client";
 import Carousel from "@/app/ComponentsHome/Carousel";
-import { AuthContext } from "@/app/Context/AuthProvider";
-import { myInfo } from "@/app/Service/User";
+
 import Image from "next/image";
-import { useContext, useEffect } from "react";
 
 function Banner() {
   const slides = [

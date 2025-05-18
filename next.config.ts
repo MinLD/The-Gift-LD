@@ -16,5 +16,15 @@ const nextConfig: NextConfig = {
     ],
   },
 };
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**", // Cho phép tất cả hostname
+      },
+    ],
+  },
+};
 
 export default nextConfig;

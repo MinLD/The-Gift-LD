@@ -16,7 +16,7 @@ function HeaderTop() {
     setIndex((prev) => (prev + 1) % dataHeader.length);
   };
   return (
-    <div className="w-full h-[45px]  bg-[#39523f] justify-center items-center flex">
+    <div className="w-full h-[45px]  bg-[#f05626] justify-center items-center flex">
       <MyLayOut>
         <div className="flex items-center justify-between max-w-[60vw] mx-auto  text-white text-center">
           <ChevronLeft

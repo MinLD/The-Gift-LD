@@ -21,4 +21,8 @@ const login = async (email: string, password: string) => {
   return await axiosClient.post("/auth/token", { email, password });
 };
 
-export { createUser, activeUser, sendCode, login };
+const refeshToken = async (token: string) => {
+  return await axiosClient.post("/auth/refresh", { token });
+};
+
+export { createUser, activeUser, sendCode, login, refeshToken };

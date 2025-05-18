@@ -40,8 +40,8 @@ function Banner() {
               src={item.image}
               alt={item.name}
               width={1920}
-              height={500}
-              className="w-full h-auto object-cover aspect-[10/4]"
+              height={800}
+              className="w-full h-auto object-cover lg:aspect-[10/4] aspect-[3/2]"
             />
           </div>
         ))}

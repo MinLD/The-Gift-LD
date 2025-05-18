@@ -1,6 +1,6 @@
 import { myInfo } from "@/app/Service/User";
 import { create } from "zustand";
-
+import Cookies from "js-cookie";
 interface Profile {
   address: string;
   city: string;
@@ -62,6 +62,7 @@ export const useProfileStore = create<ProfileState>((set) => ({
         console.log(res?.data?.result);
         set({ User: res?.data?.result, isLoadingg: false });
         set({ Avt: getInitials(res?.data?.result?.fullName) });
+        Cookies.set("roles", res?.data?.result?.roles[0]?.name);
       })
       .catch((err) => {
         console.log(err);

@@ -25,7 +25,7 @@ export default function RootLayout({
   const pathname = usePathname();
 
   // Danh sách các trang không dùng layout root
-  const excludedPages = ["Authentication", "accounts"]; // Thêm các trang khác nếu cần
+  const excludedPages = ["Authentication", "accounts", "seller"]; // Thêm các trang khác nếu cần
 
   // Kiểm tra xem trang hiện tại có nằm trong danh sách excludedPages không
   const isExcludedPage = excludedPages.some((page) =>

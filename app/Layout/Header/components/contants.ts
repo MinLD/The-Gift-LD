@@ -1,4 +1,4 @@
-import { Search, ShoppingCart, User } from "lucide-react";
+import { Bell, Languages, Search, ShoppingCart, User } from "lucide-react";
 
 type Props = {
   id: number;
@@ -40,19 +40,6 @@ const DataHeaderBottom: Props[] = [
     id: 3,
     name: "Nữ",
   },
-
-  {
-    id: 4,
-    name: "Về chúng tôi",
-  },
-  {
-    id: 5,
-    name: "Cửa hàng",
-  },
-  {
-    id: 6,
-    name: "Đối tác",
-  },
 ];
 
 const DataIcons = [
@@ -60,13 +47,24 @@ const DataIcons = [
     id: 0,
     name: Search,
   },
-  {
-    id: 1,
-    name: User,
-  },
+
   {
     id: 2,
     name: ShoppingCart,
+  },
+  {
+    id: 3,
+    name: Bell,
+    label: "Thông Báo",
+  },
+  {
+    id: 4,
+    name: Languages,
+    label: "Tiếng việt",
+  },
+  {
+    id: 1,
+    name: User,
   },
 ];
 

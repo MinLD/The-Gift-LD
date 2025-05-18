@@ -41,7 +41,7 @@ function HamburgerMenu() {
           IsOpenMenu ? "left-0" : "-left-full"
         } transition-all duration-600 fixed top-0 z-99`}
       >
-        <div className=" w-[60vw] left-0 h-screen bg-[#ffffff] ">
+        <div className=" w-[80vw] left-0 h-screen bg-[#ffffff] ">
           <div>
             <div
               className="pt-2 px-5 relative "

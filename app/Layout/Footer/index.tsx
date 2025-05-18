@@ -37,6 +37,8 @@ function MyFooter() {
                 src={logo.src}
                 className="h-[95px] w-[120px] cursor-pointer"
                 alt="logo"
+                width={120}
+                height={95}
               />
             </span>
 
@@ -86,23 +88,29 @@ function MyFooter() {
                   <p>hopevn.site@gmail.com</p>
                 </div>
               </div>
-              <div className="flex gap-2">
+              {/* <div className="flex gap-2">
                 <Image
                   src="https://han01.vstorage.vngcloud.vn/v1/AUTH_6831ce3c90cd4f47a8ca18d6545cddf9/public/Default/Media/Images/bced50fb-21fc-47ec-963b-229a05bd29f4/default_image_bced50fb-21fc-47ec-963b-229a05bd29f4_facebook_1679298790084.png"
                   alt=""
                   className="h-[32px] w-[32px]"
+                  width={32}
+                  height={32}
                 />
                 <Image
                   src="https://han01.vstorage.vngcloud.vn/v1/AUTH_6831ce3c90cd4f47a8ca18d6545cddf9/public/Default/Media/Images/7cc6c6fe-4abb-47f7-9813-78c9f8f61f73/default_image_7cc6c6fe-4abb-47f7-9813-78c9f8f61f73_youtube_1679298790118.png"
                   alt=""
                   className="h-[32px] w-[32px]"
+                  width={32}
+                  height={32}
                 />
                 <Image
                   src="https://han01.vstorage.vngcloud.vn/v1/AUTH_6831ce3c90cd4f47a8ca18d6545cddf9/public/Default/Media/Images/8d051b76-a3bb-40f1-bc95-e24ca1737421/default_image_8d051b76-a3bb-40f1-bc95-e24ca1737421_zalo_1678414322877.png"
                   alt=""
                   className="h-[32px] w-[32px]"
+                  width={32}
+                  height={32}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -161,11 +169,13 @@ function MyFooter() {
                 </div>
 
                 <div>
-                  <Image
+                  {/* <Image
                     src="https://elearning.iigvietnam.com/_next/image?url=%2Fimages%2Fimage_f.png&w=128&q=75"
                     alt=""
                     className="h-[50px] w-[126px] lg:h-[60px] lg:w-[150px]"
-                  />
+                    width={126}
+                    height={50}
+                  /> */}
                 </div>
               </div>
             </div>

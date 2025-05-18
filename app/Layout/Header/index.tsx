@@ -5,7 +5,7 @@ function MyHeader() {
   return (
     <>
       <HeaderTop />
-      <div className="sticky top-0 z-50 w-full bg-white shadow-md transition-all duration-800 ease-in-out">
+      <div className="shadow-md transition-all duration-800 ease-in-out sticky top-0 z-50 w-full bg-white ">
         <HeaderBottom />
       </div>
     </>

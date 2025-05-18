@@ -9,16 +9,27 @@ type Props = {
   Formik?: any;
   name?: string;
   value?: string;
+  disabled?: boolean;
 };
-function FormInput({ type, placeholder, id = "", label, Formik, name }: Props) {
+function FormInput({
+  type,
+  placeholder,
+  id = "",
+  label,
+  Formik,
+  name,
+  disabled = false,
+}: Props) {
   const isErr = Formik?.touched[name!] && Formik.errors[name!];
   const messageErr = Formik?.errors[name!];
   const [isShow, setIsShow] = useState<string>("password");
+
   return (
-    <div>
+    <div key={id}>
       <div className="relative">
         <label className="text-[#8e8e8e] text-sm">{label}</label>
         <input
+          disabled={disabled}
           id={id}
           type={type === "password" ? isShow : type}
           placeholder={placeholder}
@@ -26,7 +37,9 @@ function FormInput({ type, placeholder, id = "", label, Formik, name }: Props) {
           onChange={Formik?.handleChange}
           value={Formik?.values[name!] || ""}
           name={name}
-          className="outline-0 pl-2 p-3 w-full bg-[#f5f5f5] rounded-md text-md text-[#8e8e8e] "
+          className={`${
+            disabled && "bg-[#f2f2f2] hover:cursor-not-allowed"
+          } outline-0 pl-2 p-3 w-full bg-[#f5f5f5] rounded-md text-md text-[#8e8e8e] `}
         />
         {type === "password" && (
           <div className="absolute top-[50%] right-3 -translate-y-[50%] transform">
@@ -48,7 +61,11 @@ function FormInput({ type, placeholder, id = "", label, Formik, name }: Props) {
           </div>
         )}
       </div>
-      {isErr && <span className="text-red-500 text-[12px] font-medium">*{messageErr}</span>}
+      {isErr && (
+        <span className="text-red-500 text-[12px] font-medium">
+          *{messageErr}
+        </span>
+      )}
     </div>
   );
 }

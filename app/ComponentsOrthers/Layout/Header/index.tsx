@@ -35,6 +35,8 @@ function HeaderOrthers() {
     if (id === 3) {
       await DeleteCookie();
       Cookies.remove("token");
+      Cookies.remove("roles");
+      Cookies.remove("SessionToken");
       router.push("/Authentication/Login");
     }
   };

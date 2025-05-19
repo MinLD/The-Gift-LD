@@ -38,7 +38,7 @@ function SignIn({ isType = "login" }: Props) {
   const data: Form[] = [
     {
       label: "Email: ",
-      type: "email",
+      type: "text",
       name: "email",
       placeholder: "Email",
     },
@@ -61,7 +61,7 @@ function SignIn({ isType = "login" }: Props) {
       placeholder: "Full Name",
     },
   ];
-  const { User, fetchProfile } = useProfileStore();
+  const {  fetchProfile } = useProfileStore();
   const [isLoading, setIsLoading] = useState(false);
   const authcontext = useContext(AuthContext);
   if (!authcontext) {
@@ -78,12 +78,14 @@ function SignIn({ isType = "login" }: Props) {
       fullName: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Email không hợp lệ").required("Bắt buộc"),
-      password: Yup.string()
-        .min(8, "Mật khẩu phải có ít nhất 8 ký tự")
-        .required("Bắt buộc"),
       ...(isType === "register"
         ? {
+            email: Yup.string()
+              .email("Email không hợp lệ")
+              .required("Bắt buộc"),
+            password: Yup.string()
+              .min(8, "Mật khẩu phải có ít nhất 8 ký tự")
+              .required("Bắt buộc"),
             passwordrl: Yup.string()
               .oneOf([Yup.ref("password")], "Mật khẩu không khớp")
               .required("Bắt buộc"),
@@ -102,21 +104,24 @@ function SignIn({ isType = "login" }: Props) {
       console.log(values);
 
       if (isType === "login") {
-        console.log(isType);
         setIsLoading(true);
         await login(values.email, values.password)
-          .then((res) => {
-            console.log(res.data.result);
+          .then(async (res) => {
             if (res?.data?.result?.isActive) {
               toast.success("Login successfully");
               SetCookie(res?.data?.result?.token);
               Cookies.set("token", res?.data?.result?.token);
               setSessionToken(res?.data?.result?.token);
-              fetchProfile();
-              router.push("/");
-              setIsLoading(false);
+              // Chờ fetchProfile hoàn thành để lấy role
+              await fetchProfile(); // Đảm bảo fetchProfile trả về promise
+              const role = Cookies.get("roles"); // Lấy role từ cookie
 
-              return;
+              // Redirect dựa trên role
+              if (role === "ADMIN") {
+                router.push("/admin");
+              } else {
+                router.push("/");
+              }
             } else if (!res?.data?.result?.isActive) {
               toast.error("Please verify your email.");
               router.push("/Authentication/Verify/" + values.email);
@@ -168,9 +173,6 @@ function SignIn({ isType = "login" }: Props) {
   useEffect(() => {
     fetchProfile();
   }, [fetchProfile]);
-
-  console.log(User);
-
   return (
     <>
       <h2 className="font-black text-xl">

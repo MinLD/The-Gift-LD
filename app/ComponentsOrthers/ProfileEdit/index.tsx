@@ -1,9 +1,12 @@
 import LoaddingBox from "@/app/Components/BoxLoadding";
+
 import { updateMyInfo } from "@/app/Service/User";
 import { useProfileStore } from "@/app/zustand/store";
 import { X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
 
 type Props = {
   fullName: string | undefined;
@@ -13,6 +16,12 @@ type Props = {
   id: number;
   dob: string | undefined;
   gender: string | undefined;
+  type?: string;
+
+  country?: string;
+
+  city?: string;
+  address?: string;
 };
 
 function ProfileEdit({
@@ -23,13 +32,24 @@ function ProfileEdit({
   id,
   dob,
   gender,
+  type = "user",
+  country = "",
+  city = "",
+  address = "",
 }: Props) {
+  countries.registerLocale(enLocale);
+  const countryList = Object.entries(
+    countries.getNames("en", { select: "official" })
+  );
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
     email: "",
     dob: "",
     gender: "",
+    country: "",
+    city: "",
+    address: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
   const { fetchProfile } = useProfileStore();
@@ -40,8 +60,11 @@ function ProfileEdit({
       email: email || "",
       dob: dob || "",
       gender: gender || "",
+      country: country || "",
+      city: city || "",
+      address: address || "",
     });
-  }, [fullName, phone, email, dob, gender]);
+  }, [fullName, phone, email, dob, gender, country, city, address]);
 
   const handleChange = (name: string, value: string) => {
     setFormData((prev) => ({
@@ -80,7 +103,22 @@ function ProfileEdit({
       placeholder: "Email",
       disabled: true,
     },
+    {
+      id: 6,
+      name: "city",
+      type: "text",
+      placeholder: "city",
+      disabled: false,
+    },
+    {
+      id: 7,
+      name: "address",
+      type: "text",
+      placeholder: "address",
+      disabled: false,
+    },
   ];
+
   const handleSubmit = () => {
     setLoading(true);
     const updatedFields: Partial<typeof formData> = {};
@@ -107,6 +145,15 @@ function ProfileEdit({
     }
     if (formData.gender !== (gender || "")) {
       updatedFields.gender = formData.gender;
+    }
+    if (formData.address !== (address || "")) {
+      updatedFields.address = formData.address;
+    }
+    if (city !== formData.city) {
+      updatedFields.city = formData.city;
+    }
+    if (country !== formData.country) {
+      updatedFields.country = formData.country;
     }
     // Email bị disable nên không cần kiểm tra
 
@@ -135,10 +182,10 @@ function ProfileEdit({
   };
 
   return (
-    <>
+    <div>
       <div className="flex justify-between ">
         {" "}
-        <h2 className="text-xl font-bold ">Edit profile</h2>
+        <h2 className="text-xl font-bold ">Thông Tin Của Người Dùng</h2>
         <X
           size={35}
           color="#afacac"
@@ -147,6 +194,7 @@ function ProfileEdit({
           className="hover:cursor-pointer"
         />
       </div>
+
       <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-2 ">
         {inputs.map((input) => (
           <div key={input.id} className="relative">
@@ -186,7 +234,28 @@ function ProfileEdit({
             Gender
           </p>
         </div>
+
+        {type === "admin" && (
+          <div className="relative mt-5">
+            <select
+              value={formData?.country}
+              onChange={(e) => handleChange("country", e.target.value)}
+              className="h-[50px] pl-2 pt-4 border border-[#8e8e8e] rounded-md w-full text-[#3c3c3c] text-[16px]"
+            >
+              <option value="">Select country</option>
+              {countryList.map(([code, name]) => (
+                <option key={code} value={code}>
+                  {name}
+                </option>
+              ))}
+            </select>
+            <p className="absolute top-1 left-2 text-[#8e8e8e] text-[12px]">
+              Country
+            </p>
+          </div>
+        )}
       </div>
+
       <div className="flex justify-end mt-5 gap-2 items-center  ">
         <div className="text-[#3c3c3c] hover:cursor-pointer" onClick={setClose}>
           Cancel
@@ -198,7 +267,7 @@ function ProfileEdit({
           {loading ? <LoaddingBox width="5" height="5" /> : "Save"}
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

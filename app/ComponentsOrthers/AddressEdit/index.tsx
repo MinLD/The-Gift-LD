@@ -1,7 +1,7 @@
 import LoaddingBox from "@/app/Components/BoxLoadding";
 import { useProfileStore } from "@/app/zustand/store";
 import { X } from "lucide-react";
-import { useEffect,  useState } from "react";
+import { useEffect, useState } from "react";
 import countries from "i18n-iso-countries";
 import enLocale from "i18n-iso-countries/langs/en.json";
 import { updateMyInfo } from "@/app/Service/User";
@@ -109,6 +109,8 @@ function AddressEdit({ setClose, country, id, city, address }: Props) {
           className="hover:cursor-pointer"
         />
       </div>
+
+
       <div className="relative mt-5">
         <select
           value={formData?.country}
@@ -146,6 +148,8 @@ function AddressEdit({ setClose, country, id, city, address }: Props) {
         ))}
       </div>
 
+
+      
       <div className="flex justify-end mt-5 gap-2 items-center  ">
         <div className="text-[#3c3c3c] hover:cursor-pointer" onClick={setClose}>
           Cancel

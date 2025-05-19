@@ -1,11 +1,12 @@
 "use client";
 import { DeleteCookie } from "@/app/Service/ServerComponents";
 import { useProfileStore } from "@/app/zustand/store";
-import { ChevronDown, ChevronUp, CircleUserRound } from "lucide-react";
+import { ChevronDown, ChevronUp, CircleUserRound, Menu } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import { useStateStore } from "@/app/Context/StoreProvider";
 
 function HeaderOrthers() {
   const data = [
@@ -25,6 +26,7 @@ function HeaderOrthers() {
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
   const { User, Avt } = useProfileStore();
+  const { setIsOpenMenu } = useStateStore();
   const handleReturnComponent = async (id: number) => {
     if (id === 1) {
       router.push("/accounts/profile");
@@ -36,15 +38,22 @@ function HeaderOrthers() {
       await DeleteCookie();
       Cookies.remove("token");
       Cookies.remove("roles");
-      Cookies.remove("SessionToken");
+      localStorage.clear();
+      Cookies.remove("sessionToken");
       router.push("/Authentication/Login");
     }
   };
 
   return (
     <div className="bg-[#ffffff] h-[87px] w-full flex items-center justify-center">
-      <div className="mx-auto w-[92vw] lg:w-[75vw] xl:w-[80vw]">
-        <div className="flex justify-between items-center ">
+      <div className="mx-auto w-[92vw] lg:w-[75vw] xl:w-[80vw] ">
+        <div className=" flex  justify-between items-center ">
+          <div
+            className="sm:hidden w-[68px] md:w-[112px] hover:cursor-pointer"
+            onClick={() => setIsOpenMenu(true)}
+          >
+            <Menu size={32} strokeWidth={2.25} />
+          </div>
           <div className="flex gap-5 justify-center items-center">
             <div
               className=""
@@ -61,12 +70,12 @@ function HeaderOrthers() {
               />
             </div>
             <div
-              className="hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2  rounded-xl"
+              className="hidden sm:block hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2  rounded-xl"
               onClick={() => router.push("/")}
             >
               Shop
             </div>
-            <div className="hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2 rounded-xl relative">
+            <div className="hidden sm:block hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2 rounded-xl relative">
               <span
                 className="relative"
                 onClick={() => router.push("/accounts/orthers")}
@@ -76,9 +85,10 @@ function HeaderOrthers() {
               </span>
             </div>
           </div>
+          <div className="sm:hidden"></div>
 
           <div
-            className="hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2 rounded-xl text-[#333333] flex gap-1 justify-center items-center relative"
+            className="hidden hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2 rounded-xl text-[#333333] sm:flex gap-1 justify-center items-center relative"
             onClick={() => setShowMenu(!showMenu)}
           >
             <div>
@@ -92,7 +102,7 @@ function HeaderOrthers() {
             </div>
             {showMenu ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
             {showMenu && (
-              <div className="absolute w-[300px] h-auto bg-[#ffffff] top-[50px] border-[1px] rounded-2xl p-2 border-[#333333] ">
+              <div className="absolute w-[auto] min-w-[300px] mx-auto h-auto bg-[#ffffff] top-[50px]  lg:right-auto right-[-10px] border-[1px] rounded-2xl p-2 border-[#333333] ">
                 <div className="flex gap-2 items-center  mt-3 border-b-[1px] border-[#707070] pb-3 ">
                   {" "}
                   <div className="flex  gap-2 items-center">
@@ -107,7 +117,7 @@ function HeaderOrthers() {
                     </div>
                     <div className="">
                       <p className="text-[#333333] font-bold">
-                        {User?.fullName}
+                        {User?.profileUser?.fullName}
                       </p>
                       <p className="text-gray-500">{User?.email}</p>
                     </div>

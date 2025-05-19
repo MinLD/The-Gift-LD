@@ -9,6 +9,8 @@ interface Profile {
   gender: string;
   id: number;
   phone: string;
+  fullName: string;
+  email: string;
 }
 
 interface User {
@@ -57,16 +59,18 @@ export const useProfileStore = create<ProfileState>((set) => ({
 
   fetchProfile: async () => {
     set({ isLoadingg: true });
-    myInfo()
+    await myInfo()
       .then((res) => {
         console.log(res?.data?.result);
-        set({ User: res?.data?.result, isLoadingg: false });
-        set({ Avt: getInitials(res?.data?.result?.fullName) });
         Cookies.set("roles", res?.data?.result?.roles[0]?.name);
+        set({ User: res?.data?.result, isLoadingg: false });
+        set({ Avt: getInitials(res?.data?.result?.profileUser?.fullName) });
+        return res;
       })
       .catch((err) => {
         console.log(err);
         set({ error: err, isLoadingg: false });
+        return err;
       });
   },
 }));

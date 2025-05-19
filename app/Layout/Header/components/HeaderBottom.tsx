@@ -1,33 +1,26 @@
 "use client";
-import { useStateStore } from "@/app/Context/StoreProvider";
 import {
-  dataHeader,
   DataHeaderBottom,
   DataIcons,
 } from "@/app/Layout/Header/components/contants";
 import MyLayOut from "@/app/MyLayout/layout";
+import { useProfileStore } from "@/app/zustand/store";
 
 import logo from "@/public/logo2.png";
-import { Menu, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-const roles = Cookies.get("roles");
+
 function HeaderBottom() {
-  const { setIsOpenMenu } = useStateStore();
   const router = useRouter();
+  const { User } = useProfileStore();
+  const roles: boolean = User?.roles[0]?.name === "SELLER";
 
   const handlePushRouter = (name: number) => {
     if (name === 1) {
       router.push("/Authentication/Login");
     }
   };
-  //  <div
-  //           className="xl:hidden w-[68px] md:w-[112px] hover:cursor-pointer"
-  //           onClick={() => setIsOpenMenu(true)}
-  //         >
-  //           <Menu size={32} strokeWidth={2.25} />
-  //         </div>
 
   //        <div className="flex gap-5 items-center">
   //   {DataIcons.map((item) => (
@@ -49,9 +42,7 @@ function HeaderBottom() {
         <div className="flex justify-between w-full mt-2">
           <div className="flex gap-2 items-center">
             <h2 className="text-[13px] text-center sm:text-[14px]">
-              {roles === "SELLER"
-                ? "Kênh Người Bán"
-                : "Trở thành người bán hàng"}
+              {roles ? "Kênh Người Bán" : "Trở thành người bán hàng"}
             </h2>
             <div className="w-[2px] opacity-15 h-[15px] bg-[#f05626] rounded-2xl" />
             <h2 className=" text-[13px] text-center sm:text-[14px]">

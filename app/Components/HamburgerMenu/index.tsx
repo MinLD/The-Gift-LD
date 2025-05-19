@@ -1,19 +1,18 @@
 "use client";
 
-import { Search, User, X } from "lucide-react";
+import { CircleUserRound, Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import {
-  DataHeaderBottom,
-  DataIcons,
-} from "@/app/Layout/Header/components/contants";
 
 import { useStateStore } from "@/app/Context/StoreProvider";
 import { useEffect } from "react";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { DeleteCookie } from "@/app/Service/ServerComponents";
+import { useProfileStore } from "@/app/zustand/store";
 function HamburgerMenu() {
   const { IsOpenMenu, setIsOpenMenu } = useStateStore();
   const router = useRouter();
-  console.log(IsOpenMenu);
+  const { User, Avt } = useProfileStore();
   useEffect(() => {
     // Khi IsOpenMenu là true, thêm overflow: hidden để khóa scroll
     if (IsOpenMenu) {
@@ -28,6 +27,37 @@ function HamburgerMenu() {
       document.body.style.overflow = "";
     };
   }, [IsOpenMenu]);
+  const handleReturnComponent = async (id: number) => {
+    if (id === 1) {
+      router.push("/accounts/profile");
+      setIsOpenMenu(false);
+    }
+    if (id === 2) {
+      router.push("/accounts/settings");
+    }
+    if (id === 3) {
+      await DeleteCookie();
+      Cookies.remove("token");
+      Cookies.remove("roles");
+      Cookies.remove("SessionToken");
+      router.push("/Authentication/Login");
+    }
+  };
+
+  const data = [
+    {
+      id: 1,
+      name: "Profile",
+    },
+    {
+      id: 2,
+      name: "Settings",
+    },
+    {
+      id: 3,
+      name: "Log out",
+    },
+  ];
   return (
     <>
       <div
@@ -71,9 +101,22 @@ function HamburgerMenu() {
 
           <div className="px-3">
             <div className="w-full h-[50px] bg-[#f5f5f5] mt-5 rounded-3xl">
-              <p className="w-full h-full flex items-center justify-center gap-2">
-                <User size={20} strokeWidth={2.25} /> Thành viên
-              </p>
+              <div className="w-full h-full flex items-center justify-center gap-2">
+                <div className="flex  gap-2 items-center">
+                  <div>
+                    {Avt ? (
+                      <p className="rounded-full  w-[35px] h-[35px] flex items-center justify-center text-[12px] font-black bg-[#ffffff] ">
+                        {Avt}
+                      </p>
+                    ) : (
+                      <CircleUserRound size={30} />
+                    )}
+                  </div>
+                  <div className="">
+                    <p className="text-gray-500">{User?.email}</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="relative mb-3 mt-3">
               <input
@@ -88,26 +131,34 @@ function HamburgerMenu() {
             <div className="w-full h-[1px] bg-[#f1f1f1] mt-5" />
             <h2 className="text-lg font-bold mt-2 text-[#272727]">Danh mục</h2>
 
+            <div
+              className=" hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2  rounded-xl"
+              onClick={() => router.push("/")}
+            >
+              Shop
+            </div>
+            <div className="hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2 rounded-xl relative">
+              <span
+                className="relative"
+                onClick={() => router.push("/accounts/orthers")}
+              >
+                Orthers
+                <div className="absolute w-full left-0 bottom-0 h-[1px] bg-[#333333]" />
+              </span>
+            </div>
+
             <div className="overflow-y-scroll  max-h-[400px]">
-              {DataHeaderBottom.map((item, k) => (
+              {data.map((item) => (
                 <div
-                  key={k}
-                  className="w-full h-[50px] bg-[#f5f5f5] mt-5 rounded-3xl"
+                  key={item.id}
+                  className="hover:bg-[#f5f5f5] px-3 py-2 rounded-xl mt-3 hover:cursor-pointer"
+                  onClick={() => handleReturnComponent(item.id)}
                 >
-                  <p className="w-full h-full flex items-center justify-center gap-2">
-                    {item.name}
-                  </p>
+                  {item.name}
                 </div>
               ))}
             </div>
 
-            <div className="flex gap-10 items-center justify-center mt-2">
-              {DataIcons.map((item) => (
-                <div key={item.id}>
-                  <item.name size={25} strokeWidth={2.25} />
-                </div>
-              ))}
-            </div>
             <div className="w-full h-[1px] bg-[#f1f1f1] mt-2" />
             <p className="text-center mt-2 ">
               <span className="text-[#272727] font-bold ">Allbirds</span> &copy;

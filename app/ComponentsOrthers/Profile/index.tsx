@@ -22,7 +22,7 @@ function Profile() {
       <h2 className="text-xl font-bold">Profile </h2>
       <div className="w-full h-auto bg-[#ffffff] mt-10 rounded-2xl p-4">
         <div className="flex  gap-2 items-center">
-          <p className="font-black">{User?.fullName}</p>
+          <p className="font-black">{User?.profileUser?.fullName}</p>
           <div className="hover:cursor-pointer ">
             <Pencil
               size={15}
@@ -89,10 +89,12 @@ function Profile() {
                     id={User?.profileUser?.id || 0}
                     setClose={() => setShowProfile(false)}
                     email={User?.email}
-                    fullName={User?.fullName}
+                    fullName={User?.profileUser?.fullName}
                     phone={User?.profileUser?.phone}
                     dob={User?.profileUser?.dob}
                     gender={User?.profileUser?.gender}
+
+
                   />
                 </div>
               )}

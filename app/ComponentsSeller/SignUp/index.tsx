@@ -6,7 +6,7 @@ import { useProfileStore } from "@/app/zustand/store";
 import { useFormik } from "formik";
 import { Check } from "lucide-react";
 
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import * as Yup from "yup"; // Import Yup để xác thực
 import { CreateSeller } from "@/app/Service/Seller";
 import { toast } from "sonner";
@@ -178,7 +178,7 @@ function SignUpSeller() {
           <div className="">
             {data1.slice(0, 3).map((i, k) => (
               <div className={`mt-4`} key={i.label}>
-                <label key={k}>{i.label}</label>
+                <label>{i.label}</label>
                 <div>
                   <FormInput
                     disabled={i.name === "email"}
@@ -220,7 +220,7 @@ function SignUpSeller() {
               <h2 className="text-[17px] text-[#272727]">
                 Loại hình kinh doanh
               </h2>
-              {data2.map((i, k) => (
+              {data2.map((i) => (
                 <div className="flex gap-2" key={i.id}>
                   <input
                     type="radio"

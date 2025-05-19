@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const privatePaths = ["/admin"];
+const privateAdminPaths = ["/admin"];
 const authPaths = [
   "/Authentication/Login",
   "/Authentication/Sign",
@@ -31,9 +31,20 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // Nếu người dùng truy cập trang privatePaths mà không có token thì chuyển hướng về trang login
-  if (privatePaths.some((path) => pathname.startsWith(path)) && !sessionToken) {
-    return NextResponse.redirect(new URL("/Authentication/Login", request.url));
+  // Nếu người dùng truy cập trang privateAdminPaths mà không có role admin thì chuyển hướng về trang chủ
+  if (
+    privateAdminPaths.some((path) => pathname.startsWith(path)) &&
+    roles !== "ADMIN"
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+  // nếu admin vào trang người dùng sẽ đá về trang admin
+  if (
+    privateAdminPaths.some((path) => !pathname.startsWith(path)) &&
+    roles === "ADMIN" &&
+    pathname !== "/admin"
+  ) {
+    return NextResponse.redirect(new URL("/admin", request.url));
   }
 
   // Nếu người dùng truy cập trang authPaths mà có token thì chuyển hướng về trang home
@@ -43,3 +54,6 @@ export function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|.*\\..*).*)"], // Loại trừ các route tĩnh
+};

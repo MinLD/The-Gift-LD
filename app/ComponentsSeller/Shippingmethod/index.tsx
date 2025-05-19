@@ -35,7 +35,7 @@ function ShippingMethod() {
         Kích hoạt phương thức vận chuyển
       </p>
       <div className="">
-        {data2.map((i, k) => (
+        {data2.map((i) => (
           <div key={i.id} className="mt-5 ">
             <label htmlFor="">{i.label}</label>
             <div className="relative w-full h-[50px] bg-[#f6f6f6] py-2 pl-5 rounded-md flex items-center mt-2">

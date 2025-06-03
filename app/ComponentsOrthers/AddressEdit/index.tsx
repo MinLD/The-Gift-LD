@@ -76,6 +76,7 @@ function AddressEdit({ setClose, country, id, city, address }: Props) {
     if (Object.keys(updatedFields).length > 0) {
       //Object.keys(obj) trả về một mảng chứa tất cả các key (dưới dạng string).
       console.log("Updated fields:", updatedFields);
+      setLoading(true);
 
       updateMyInfo(id, updatedFields)
         .then((res) => {
@@ -109,7 +110,6 @@ function AddressEdit({ setClose, country, id, city, address }: Props) {
           className="hover:cursor-pointer"
         />
       </div>
-
 
       <div className="relative mt-5">
         <select
@@ -148,8 +148,6 @@ function AddressEdit({ setClose, country, id, city, address }: Props) {
         ))}
       </div>
 
-
-      
       <div className="flex justify-end mt-5 gap-2 items-center  ">
         <div className="text-[#3c3c3c] hover:cursor-pointer" onClick={setClose}>
           Cancel

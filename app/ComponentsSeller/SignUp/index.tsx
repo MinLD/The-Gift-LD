@@ -6,7 +6,7 @@ import { useProfileStore } from "@/app/zustand/store";
 import { useFormik } from "formik";
 import { Check } from "lucide-react";
 
-import {  useState } from "react";
+import { useState } from "react";
 import * as Yup from "yup"; // Import Yup để xác thực
 import { CreateSeller } from "@/app/Service/Seller";
 import { toast } from "sonner";
@@ -171,6 +171,7 @@ function SignUpSeller() {
       }
     },
   });
+
   const handleReturnForm = () => {
     switch (step) {
       case 0:

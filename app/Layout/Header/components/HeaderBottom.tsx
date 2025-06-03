@@ -22,26 +22,15 @@ function HeaderBottom() {
     }
   };
 
-  //        <div className="flex gap-5 items-center">
-  //   {DataIcons.map((item) => (
-  //     <div
-  //       key={item.id}
-  //       onClick={() => handlePushRouter(item.id)}
-  //       className={`cursor-pointer hover:opacity-50  ${
-  //         item.id === 0 && "hidden md:block"
-  //       }`}
-  //     >
-  //       <item.name />
-  //     </div>
-  //   ))}
-  // </div>
-
   return (
-    <div className="w-full min-h-[70px] h-auto  bg-[#f7f2eb]  shadow-2xl flex justify-center items-center ">
+    <div className="w-full min-h-[70px] h-auto  bg-[#f7f2eb] flex justify-center items-center ">
       <MyLayOut>
         <div className="flex justify-between w-full mt-2">
           <div className="flex gap-2 items-center">
-            <h2 className="text-[13px] text-center sm:text-[14px]">
+            <h2
+              className="text-[13px] text-center sm:text-[14px] hover:opacity-50 cursor-pointer"
+              onClick={() => router.push("/seller/dashboard")}
+            >
               {roles ? "Kênh Người Bán" : "Trở thành người bán hàng"}
             </h2>
             <div className="w-[2px] opacity-15 h-[15px] bg-[#f05626] rounded-2xl" />
@@ -82,19 +71,6 @@ function HeaderBottom() {
               <div className="hidden absolute top-1/2 right-3 transform translate-y-[-50%] text-[#ffffff] bg-[#f05626] w-[70px] h-[35px]  sm:flex items-center justify-center">
                 <Search size={20} strokeWidth={2.25} />
               </div>
-            </div>
-            <div className="hidden sm:flex gap-2 mt-2 mb-2 ">
-              {DataHeaderBottom.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => handlePushRouter(item.id)}
-                  className={`text-[12px] cursor-pointer hover:opacity-50  ${
-                    item.id === 0 && "hidden md:block"
-                  }`}
-                >
-                  {item.name}
-                </div>
-              ))}
             </div>
           </div>
           <div>

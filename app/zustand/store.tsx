@@ -12,12 +12,33 @@ interface Profile {
   fullName: string;
   email: string;
 }
+interface Address {
+  name: string;
+  address: string;
+  detailsAddress: string;
+  phone: string;
+  default: boolean;
+  isType: string;
+  id: number;
+}
+[];
 
 interface User {
   id: string;
   fullName: string;
   email: string;
   profileUser: Profile;
+  seller: {
+    addresses: Address[];
+    phone: string;
+    id: number;
+    description: string;
+    name: string;
+    image: {
+      url: string;
+    };
+    taxCode: string;
+  };
   roles: [
     {
       name: string;

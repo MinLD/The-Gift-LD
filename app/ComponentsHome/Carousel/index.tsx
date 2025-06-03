@@ -5,7 +5,7 @@ import { ChevronLeft } from "lucide-react";
 
 type Props = {
   children?: React.ReactNode;
-  slides: { name: string; description: string; image: string }[];
+  slides: { name?: string; description?: string; image?: string }[];
   autoSlide?: boolean;
   autoSlideInterval?: number;
 };

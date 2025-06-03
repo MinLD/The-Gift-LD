@@ -60,6 +60,7 @@ function HeaderDashBoard({ isOpenSibar }: Props) {
             >
               <Menu size={25} strokeWidth={1.25} />
             </div>
+
             {data.map((item) => (
               <div key={item.id} className="text-[16px]">
                 {item.name}
@@ -70,7 +71,9 @@ function HeaderDashBoard({ isOpenSibar }: Props) {
             {icons.map((i) => (
               <div
                 key={i.id}
-                className="hover:cursor-pointer flex gap-2 items-center"
+                className={`${
+                  i.id === 0 || i.id === 1 || (i.id === 2 && "hidden")
+                } hover:cursor-pointer flex gap-2 items-center`}
               >
                 <i.name size={25} strokeWidth={1.25} />
 

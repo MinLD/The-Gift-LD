@@ -1,5 +1,7 @@
 import Banner from "@/app/ComponentsHome/Banner";
+import Category from "@/app/ComponentsHome/Category";
 import GiftCart from "@/app/ComponentsHome/GiftCart";
+import MyLayOut from "@/app/MyLayout/layout";
 import { myInfo } from "@/app/Service/User";
 
 export default async function Home() {
@@ -16,7 +18,11 @@ export default async function Home() {
 
   return (
     <>
-      <Banner />
+      <MyLayOut>
+        <Banner />
+        <Category />
+      </MyLayOut>
+
       <GiftCart />
     </>
   );

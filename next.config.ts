@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
 
   images: {
+    domains: ["res.cloudinary.com"], // Thêm domain của Cloudinary
     remotePatterns: [
       {
         protocol: "https",
@@ -13,18 +14,22 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "thecrafthouse.vn",
       },
-    ],
-  },
-};
-module.exports = {
-  images: {
-    remotePatterns: [
       {
         protocol: "https",
-        hostname: "**", // Cho phép tất cả hostname
+        hostname: "cdn.shopify.com", // Thêm hostname mới
       },
     ],
   },
 };
+// module.exports = {
+//   images: {
+//     remotePatterns: [
+//       {
+//         protocol: "https",
+//         hostname: "**", // Cho phép tất cả hostname
+//       },
+//     ],
+//   },
+// };
 
 export default nextConfig;

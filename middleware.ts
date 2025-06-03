@@ -20,7 +20,7 @@ export function middleware(request: NextRequest) {
     sellerPaths.some((path) => pathname.startsWith(path)) &&
     roles === "SELLER"
   ) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/seller/dashboard", request.url));
   }
 
   //nếu người dùng ko có role seller ko được vào trang dashboard

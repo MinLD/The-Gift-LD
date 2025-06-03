@@ -25,14 +25,14 @@ function Sibar({ isSidebarOpen, data }: Props) {
       <div
         className={`h-screen bg-[#1a202c] text-white  transition-all duration-300 flex flex-col ${
           isSidebarOpen
-            ? "translate-x-0 w-64"
+            ? "translate-x-0 w-70"
             : "-translate-x-full w-0 overflow-hidden"
         }`}
       >
         <div className="flex items-center justify-center w-full h-[80px] border-b-1 border-gray-600">
           <span className="text-xl font-bold">COREUI REACT.JS</span>
         </div>
-        <div className="flex-1 mt-5">
+        <div className="flex-1 mt-5 overflow-y-auto ">
           <div
             className="flex gap-2 items-center p-3 bg-[#2a303d] rounded px-2 -y-1 hover:cursor-pointer"
             onClick={() => setTypeSide("DashBoard")}

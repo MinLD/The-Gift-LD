@@ -14,7 +14,7 @@ export const useSidebar = create<ProfileState>()(
       setTypeSide: (TypeSide: string) => set({ TypeSide }),
     }),
     {
-      name: "sidebar-storage", // Tên key trong localStorage
+      name: "TypeSide", // Tên key trong localStorage
       storage: createJSONStorage(() => localStorage), // Sử dụng localStorage
     }
   )

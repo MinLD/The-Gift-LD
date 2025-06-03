@@ -1,5 +1,8 @@
+import { refeshToken } from "@/app/Service/Auth";
+import { SetCookie } from "@/app/Service/ServerComponents";
 import axios from "axios";
 import Cookies from "js-cookie";
+
 export const axiosClient = axios.create({
   baseURL: "http://localhost:8080/identity/",
   timeout: 30000,
@@ -8,12 +11,18 @@ export const axiosClient = axios.create({
   },
 });
 
-axiosClient.interceptors.request.use((config) => {
-  const sessionToken = Cookies.get("token");
-  if (sessionToken) {
-    config.headers.Authorization = `Bearer ${sessionToken}`;
-  }
-  return config;
-});
+// Interceptor cho request
+axiosClient.interceptors.request.use(
+  (config) => {
+    const sessionToken = Cookies.get("token");
+    if (sessionToken) {
+      config.headers.Authorization = `Bearer ${sessionToken}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Interceptor cho response
 
 export default axiosClient;

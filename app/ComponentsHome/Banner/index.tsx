@@ -32,20 +32,22 @@ function Banner() {
   ];
 
   return (
-    <div className="w-full mx-auto ">
-      <Carousel slides={slides} autoSlide={true} autoSlideInterval={10000}>
-        {slides.map((item) => (
-          <div key={item.name} className="w-full flex-shrink-0">
-            <Image
-              src={item.image}
-              alt={item.name}
-              width={1920}
-              height={800}
-              className="w-full h-auto object-cover lg:aspect-[10/4] aspect-[3/2]"
-            />
-          </div>
-        ))}
-      </Carousel>
+    <div className="flex gap-2 mt-5">
+      <div className="max-w-[90vw]">
+        <Carousel slides={slides} autoSlide={true} autoSlideInterval={10000}>
+          {slides.map((item) => (
+            <div key={item.name} className="w-full flex-shrink-0">
+              <Image
+                src={item.image}
+                alt={item.name}
+                width={1920}
+                height={800}
+                className="w-full h-auto object-cover lg:aspect-[10/3] aspect-[3/2]"
+              />
+            </div>
+          ))}
+        </Carousel>
+      </div>
     </div>
   );
 }

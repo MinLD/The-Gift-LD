@@ -1,16 +1,8 @@
 function FooterOrthers() {
   const data = [
     {
-      id: 1,
-      name: "Refund policy",
-    },
-    {
       id: 2,
       name: "Privacy policy",
-    },
-    {
-      id: 3,
-      name: "Terms of service",
     },
   ];
   return (
@@ -18,7 +10,9 @@ function FooterOrthers() {
       <div className="border-t border-gray-300 ">
         <div className="flex gap-4 items-center py-3 ">
           {data.map((item) => (
-            <div key={item.id}>{item.name}</div>
+            <div key={item.id} className=" text-[16px] text-[#1773b0]">
+              {item.name}
+            </div>
           ))}
         </div>
       </div>

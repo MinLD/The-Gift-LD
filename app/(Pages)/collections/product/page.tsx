@@ -1,8 +1,11 @@
 "use client";
+import AvatarStore from "@/app/Components/AvatarStore";
 import LoadingOverlay from "@/app/Components/LoaddingOverlay";
 import MyLayOut from "@/app/MyLayout/layout";
+import { postCart } from "@/app/Service/Cart";
 import { GetByProductId } from "@/app/Service/products";
 import { GetSeller } from "@/app/Service/Seller";
+import { useProfileStore } from "@/app/zustand/store";
 import { Check, MessageSquareText, Minus, Plus, Store } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -50,7 +53,9 @@ type dataProduct = {
 };
 
 function ProductDetail() {
-  const [options, setOptions] = useState<string>("");
+  const [options, setOptions] = useState<String | undefined>(undefined);
+  const [nameOption, setNameOption] = useState<String | undefined>(undefined);
+
   const searchParams = useSearchParams();
   const id = searchParams.get("aa") || "0"; // Mặc định là "0" nếu không có ID
   const name = searchParams.get("bb") || "Không có tên";
@@ -59,8 +64,9 @@ function ProductDetail() {
   const [seller, setSeller] = useState<dataSeller | null>(null);
   const [isLoading, setIsLoading] = useState(true); // Thêm trạng thái loading
   const router = useRouter();
+  const [isLoadingCart, setIsLoadingCart] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState<string>("");
-
+  const { fetchCart } = useProfileStore();
   const [quantity, setQuantity] = useState(1);
 
   const handleIncrement = () => {
@@ -90,6 +96,18 @@ function ProductDetail() {
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+  const handlePostCart = async () => {
+    setIsLoadingCart(true);
+    await postCart(Number(id), quantity, Number(options), Number(nameOption))
+      .then(() => {
+        fetchCart();
+        setIsLoadingCart(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoadingCart(false);
       });
   };
 
@@ -125,6 +143,7 @@ function ProductDetail() {
       </MyLayOut>
     );
   }
+  console.log(seller);
   return (
     <div className="min-h-screen w-full pt-10 bg-[#ffffff]">
       <MyLayOut>
@@ -210,17 +229,21 @@ function ProductDetail() {
 
             {products.attributes && products.attributes.length > 0 && (
               <div className="mt-10">
-                {products.attributes.map((item, index) => (
-                  <div className="">
+                {products.attributes.map((i, index) => (
+                  <div className="" key={index}>
                     <h2 className="text-[16px] mt-5 text-[#646464]">
-                      {item.name}
+                      {i.name}
                     </h2>
                     <div className="grid grid-cols-2 gap-2">
-                      {item.attributesValues.map((item, index) => (
+                      {i.attributesValues.map((item, index) => (
                         <div
-                          onClick={() => setOptions(item.name)}
+                          key={index}
+                          onClick={() => {
+                            setOptions(item.id);
+                            setNameOption(i.id);
+                          }}
                           className={`${
-                            options === item.name
+                            Number(options) === Number(item.id)
                               ? "border-[#F15D2F] text-[#F15D2F]"
                               : ""
                           } hover:text-[#F15D2F] relative mt-3 flex gap-2 items-center border-1 border-[#646464] w-auto h-[50px] p-1 hover:cursor-pointer hover:border-[#F15D2F]`}
@@ -239,7 +262,7 @@ function ProductDetail() {
                           <span className="text-[16px] w-8 text-center ">
                             {item.name}
                           </span>
-                          {options === item.name && (
+                          {Number(options) === Number(item.id) && (
                             <div className="absolute bottom-0 right-0 bg-[#F15D2F] text-white rounded-tl-[100%] flex justify-center items-center w-3 h-3">
                               <Check size={15} />
                             </div>
@@ -284,45 +307,28 @@ function ProductDetail() {
               </div>
 
               <div className="flex gap-2 sm:flex-row flex-col mt-5">
-                <button className="font-bold hover:cursor-pointer w-full h-[50px] bg-[#FFB74A] text-white hover:bg-transparent border border-[#FFB74A] hover:text-[#FFB74A]">
-                  Add to cart
+                <button
+                  onClick={handlePostCart}
+                  className="flex justify-center items-center  font-bold hover:cursor-pointer w-full h-[50px] bg-[#FFB74A] text-white hover:bg-transparent border border-[#FFB74A] hover:text-[#FFB74A]"
+                >
+                  {isLoadingCart ? (
+                    <span className="text-[30px] font-bold flex items-center animate-pulse  ">
+                      . . .
+                    </span>
+                  ) : (
+                    "Add to cart"
+                  )}
                 </button>
                 <button className="font-bold hover:cursor-pointer  w-full h-[50px] bg-[#272727] text-white hover:bg-transparent border border-[#272727] hover:text-[#272727]">
                   Buy it now
                 </button>
               </div>
               {/* Shop  */}
-              <div className="w-full h-auto flex gap-5 bg-[#ffffff] mt-10 items-center">
-                <div className="w-[80px] h-[80px] border-1 border-[#d8d8d8] rounded-full relative">
-                  <Image
-                    alt=""
-                    src={seller?.image?.url || ""}
-                    width={300}
-                    height={300}
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                  <div className="text-xs w-[70px] h-5 bg-[#EE4D2D] text-white  flex items-center justify-center absolute bottom-0 left-1/2 -translate-x-1/2 rounded-sm">
-                    Yêu Thích
-                  </div>
-                </div>
-                <div className="flex flex-col gap-4">
-                  <h2 className="text-[16px] text-[#272727] ">
-                    {" "}
-                    {seller?.name}
-                  </h2>
-                  <div className="flex  gap-2">
-                    <div className="text-[16px] flex gap-2 items-center bg-[#FFEEE8] p-1 border border-[#EE4D2D] hover:cursor-pointer  hover:text-white">
-                      <MessageSquareText size={20} color="#EE4D2D" />{" "}
-                      <span className="text-[#EE4D2D]">Chat Ngay</span>
-                    </div>
-                    <div className="text-[16px] flex gap-2 items-center p-1 border border-[#c5c5c5] hover:cursor-pointer ">
-                      <Store size={20} /> Xem Shop
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-[1px] opacity-15 h-[50px] bg-[#9999A9] rounded-2xl" />
-              </div>
+              <AvatarStore
+                image={seller?.image.url || "/fallback-image.jpg"}
+                name={seller?.name || ""}
+                id={seller?.id || 0}
+              />
               {/* chi tiết sản phẩm */}
               <div className="bg-white mt-10 rounded-lg  mb-20 max-w-sm w-full">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">

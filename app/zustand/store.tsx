@@ -1,6 +1,7 @@
 import { myInfo } from "@/app/Service/User";
 import { create } from "zustand";
 import Cookies from "js-cookie";
+import { getCart } from "@/app/Service/Cart";
 interface Profile {
   address: string;
   city: string;
@@ -17,19 +18,79 @@ interface Address {
   address: string;
   detailsAddress: string;
   phone: string;
-  default: boolean;
+  addressDefault: boolean;
   isType: string;
   id: number;
 }
 [];
+interface Cart {
+  items: {
+    products_order: {
+      id_atributes_name: number;
+      id_atributes_value: number;
+      atributes_name: string;
+      id: number;
+      atributes_Value: string;
+      id_product: number;
+      images: {
+        url: string;
+      }[];
+      attributesValuesProduct: {
+        id: number;
+        name: string;
+        price: number;
+        quantity: number;
+        image?: {
+          url: string;
+        };
+      }[];
+      name: string;
+      price: number;
+    };
+    id: number;
+    quantity: number;
+    unitPrice: number;
+  }[];
+}
+interface dataProduct {
+  views: number;
+  sku: string;
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  category: number;
+  trademark: string;
+  origin: string;
+  style: string;
+  material: string;
+  discount: number;
+  quantity: number;
+  images: {
+    url: string | null;
+  }[];
+  attributes: {
+    name: string;
+    id: string;
+    attributesValues: {
+      name: string;
+      id: string;
+      price: number;
+      quantity: number;
+      image: {
+        url: string | null;
+      };
+    }[];
+  }[];
+}
 
 interface User {
   id: string;
   fullName: string;
   email: string;
   profileUser: Profile;
+  addresses: Address[];
   seller: {
-    addresses: Address[];
     phone: string;
     id: number;
     description: string;
@@ -49,10 +110,12 @@ interface User {
 }
 
 interface ProfileState {
+  Cart: Cart | null;
   User: User | null;
   isLoadingg: boolean;
   error: string | null;
   fetchProfile: () => Promise<void>;
+  fetchCart: () => Promise<void>;
   Avt: string;
 }
 
@@ -73,6 +136,7 @@ export function getInitials(name: string): string {
 }
 // Tạo Zustand store
 export const useProfileStore = create<ProfileState>((set) => ({
+  Cart: null,
   User: null,
   isLoadingg: false,
   error: null,
@@ -86,6 +150,21 @@ export const useProfileStore = create<ProfileState>((set) => ({
         Cookies.set("roles", res?.data?.result?.roles[0]?.name);
         set({ User: res?.data?.result, isLoadingg: false });
         set({ Avt: getInitials(res?.data?.result?.profileUser?.fullName) });
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        set({ error: err, isLoadingg: false });
+        return err;
+      });
+  },
+  fetchCart: async () => {
+    set({ isLoadingg: true });
+    await getCart()
+      .then((res) => {
+        console.log(res?.data?.result);
+        set({ isLoadingg: false });
+        set({ Cart: res?.data?.result });
         return res;
       })
       .catch((err) => {

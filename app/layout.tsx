@@ -12,6 +12,7 @@ import { useProfileStore } from "@/app/zustand/store";
 import { Suspense, useEffect } from "react";
 import LoadingOverlay from "@/app/Components/LoaddingOverlay";
 import HamburgerMenu from "@/app/Components/HamburgerMenu";
+import Cookies from "js-cookie";
 
 const roboto = Roboto({
   subsets: ["latin-ext"],
@@ -25,18 +26,27 @@ export default function RootLayout({
   const pathname = usePathname();
 
   // Danh sách các trang không dùng layout root
-  const excludedPages = ["Authentication", "accounts", "seller", "admin"]; // Thêm các trang khác nếu cần
+  const excludedPages = [
+    "Authentication",
+    "accounts",
+    "seller",
+    "admin",
+    "checkouts",
+  ]; // Thêm các trang khác nếu cần
 
   // Kiểm tra xem trang hiện tại có nằm trong danh sách excludedPages không
   const isExcludedPage = excludedPages.some((page) =>
     pathname?.split("/").includes(page)
   );
 
-  const { fetchProfile } = useProfileStore();
+  const { fetchProfile, fetchCart } = useProfileStore();
 
   useEffect(() => {
-    fetchProfile();
-  }, [fetchProfile]);
+    if (Cookies.get("token")) {
+      fetchProfile();
+      fetchCart();
+    }
+  }, []);
 
   return (
     <html lang="vi" className={roboto.className}>
@@ -54,7 +64,7 @@ export default function RootLayout({
               {children}
             </Suspense>
             {!isExcludedPage && <MyFooter />}
-            {!isExcludedPage && <HamburgerMenu />}
+          <HamburgerMenu />
           </StoreProvider>
         </AuthProvider>
 

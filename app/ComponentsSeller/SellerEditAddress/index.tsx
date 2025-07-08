@@ -20,7 +20,7 @@ type Props = {
   address: string;
   detailsAddress: string;
   isType: string;
-  isDefault: boolean;
+  addressDefault: boolean;
   id: number;
 };
 
@@ -31,7 +31,7 @@ function SellerEditAddress({
   address,
   detailsAddress,
   isType,
-  isDefault,
+  addressDefault,
   id,
 }: Props) {
   const inputs = [
@@ -59,7 +59,7 @@ function SellerEditAddress({
   ];
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [checked, setChecked] = useState(isDefault);
+  const [checked, setChecked] = useState(addressDefault);
   const { fetchProfile } = useProfileStore();
   const [formData, setFormData] = useState({
     name: name || "",
@@ -67,7 +67,7 @@ function SellerEditAddress({
     address: address || "",
     detailsAddress: detailsAddress || "",
     isType: isType || "",
-    isDefault: isDefault || false,
+    addressDefault: addressDefault || false,
   });
 
   useEffect(() => {
@@ -77,10 +77,10 @@ function SellerEditAddress({
       address: address || "",
       detailsAddress: detailsAddress || "",
       isType: isType || "",
-      isDefault: isDefault || false,
+      addressDefault: addressDefault || false,
     });
-    setChecked(isDefault);
-  }, [name, phone, address, detailsAddress, isType, isDefault]);
+    setChecked(addressDefault);
+  }, [name, phone, address, detailsAddress, isType, addressDefault]);
 
   const handleChange = (name: string, value: string) => {
     setFormData((prev) => ({
@@ -91,7 +91,7 @@ function SellerEditAddress({
 
   const handleSubmit = async () => {
     setLoading(true);
-    formData.isDefault = checked;
+    formData.addressDefault = checked;
 
     if (
       formData.name !== (name || "") ||
@@ -99,8 +99,8 @@ function SellerEditAddress({
       formData.address !== (address || "") ||
       formData.detailsAddress !== (detailsAddress || "") ||
       formData.isType !== (isType || "") ||
-      formData.isDefault !== checked ||
-      formData.isDefault !== isDefault
+      formData.addressDefault !== checked ||
+      formData.addressDefault !== addressDefault
     ) {
       setLoading(true);
       await UpdateAddress(id, formData)

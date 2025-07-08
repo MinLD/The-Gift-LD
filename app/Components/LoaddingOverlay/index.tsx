@@ -13,7 +13,6 @@ const LoadingOverlay = ({
     <>
       {isEmsty ? (
         <div>
-          {" "}
           <div className=" w-full p-8 rounded-3xl  flex flex-col items-center gap-10 animate-fade-in transition-all duration-300">
             {/* Logo có hiệu ứng xoay nhẹ */}
             <div className="w-24 h-24 animate-spin-slow">

@@ -8,31 +8,13 @@ import SellerEditAddress from "@/app/ComponentsSeller/SellerEditAddress";
 
 import { Delete } from "@/app/Service/Seller";
 import { useProfileStore } from "@/app/zustand/store";
-import { MapPinHouse, Phone, User2 } from "lucide-react";
+import { MapPinHouse } from "lucide-react";
 
 import { useState } from "react";
 import { toast } from "sonner";
 
 function AddressSellerManagement() {
   const { User, fetchProfile } = useProfileStore();
-  const titleTable = [
-    {
-      id: 0,
-      name: "Họ Tên",
-      icon: User2,
-    },
-    {
-      id: 1,
-      name: "Số điện thoại",
-      icon: Phone,
-    },
-    {
-      id: 2,
-      name: "Địa chỉ",
-      icon: MapPinHouse,
-    },
-  ];
-
   const [isLoading, setLoading] = useState<boolean>(true);
   const [ConfirmDelete, setConfirmDelete] = useState<number>(-1);
   const [EditProfile, setEditProfile] = useState<number>(-1);
@@ -43,13 +25,11 @@ function AddressSellerManagement() {
     Delete(ConfirmDelete)
       .then(() => {
         fetchProfile();
-        toast.success("Xóa người dùng thành công");
-
+        toast.success("Xóa địa chỉ thành công!");
         setLoading(false);
         setConfirmDelete(-1);
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err.response.data.message);
         setLoading(false);
         setConfirmDelete(-1);
@@ -98,10 +78,10 @@ function AddressSellerManagement() {
         <div className="mt-2 mb-5 w-full h-[1px] bg-[#c5c5c5]" />
 
         <div className="flex flex-col  gap-2  px-2 overflow-x-scroll  w-full">
-          {User?.seller?.addresses?.length ? (
+          {User?.addresses?.length ? (
             <>
               {" "}
-              {User?.seller?.addresses?.map((i) => (
+              {User?.addresses?.map((i) => (
                 <div key={i.id}>
                   <div className="flex gap-5 items-center px-2">
                     <MapPinHouse
@@ -121,7 +101,7 @@ function AddressSellerManagement() {
                       <Form
                         name={"Loại địa chỉ"}
                         value={i.isType || "[Chưa cập nhật]"}
-                        defaultt={i.default}
+                        defaultt={i.addressDefault}
                       />
 
                       <Form
@@ -157,7 +137,7 @@ function AddressSellerManagement() {
                               id={i.id}
                               name={i.name}
                               phone={i.phone}
-                              isDefault={i.default}
+                              addressDefault={i.addressDefault}
                               isType={i.isType}
                               setClose={() => setEditProfile(-1)}
                             />
@@ -186,9 +166,12 @@ function AddressSellerManagement() {
               ))}
             </>
           ) : (
-          <>
-          <LoadingOverlay message="Bạn chưa cập nhật địa chỉ!" isEmsty={true}/>
-          </>
+            <>
+              <LoadingOverlay
+                message="Bạn chưa cập nhật địa chỉ!"
+                isEmsty={true}
+              />
+            </>
           )}
         </div>
       </div>

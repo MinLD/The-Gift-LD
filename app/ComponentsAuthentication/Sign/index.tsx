@@ -61,7 +61,7 @@ function SignIn({ isType = "login" }: Props) {
       placeholder: "Full Name",
     },
   ];
-  const {  fetchProfile } = useProfileStore();
+  const { fetchProfile, fetchCart } = useProfileStore();
   const [isLoading, setIsLoading] = useState(false);
   const authcontext = useContext(AuthContext);
   if (!authcontext) {
@@ -101,7 +101,6 @@ function SignIn({ isType = "login" }: Props) {
         password: true,
         fullName: true,
       });
-      console.log(values);
 
       if (isType === "login") {
         setIsLoading(true);
@@ -114,6 +113,7 @@ function SignIn({ isType = "login" }: Props) {
               setSessionToken(res?.data?.result?.token);
               // Chờ fetchProfile hoàn thành để lấy role
               await fetchProfile(); // Đảm bảo fetchProfile trả về promise
+              await fetchCart();
               const role = Cookies.get("roles"); // Lấy role từ cookie
 
               // Redirect dựa trên role

@@ -51,8 +51,8 @@ const DeleteProduct = async (id: number) => {
   return await axiosClient.delete(`/products/${id}`);
 };
 
-const GetMyProducts = async (id: number) => {
-  return await axiosClient.get(`/products/seller/${id}`);
+const GetMyProducts = async (id_Seller: number, id_Category: number) => {
+  return await axiosClient.get(`/products/${id_Seller}/${id_Category}`);
 };
 const PatchProduct = async (id: number, formData: any) => {
   return await axiosClient.patch(`/products/${id}`, formData, {

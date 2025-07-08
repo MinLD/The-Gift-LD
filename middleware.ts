@@ -8,7 +8,7 @@ const authPaths = [
 ];
 const sellerPaths = ["/seller/signup"];
 
-const privateSellerPaths = ["/dashboard"];
+const privateSellerPaths = ["/seller/dashboard"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -21,6 +21,18 @@ export function middleware(request: NextRequest) {
     roles === "SELLER"
   ) {
     return NextResponse.redirect(new URL("/seller/dashboard", request.url));
+  }
+  //Nếu người dùng chưa có roles la seller rồi thì ko được vào trang seller
+  if (
+    privateSellerPaths.some((path) => pathname.startsWith(path)) &&
+    roles === "USER"
+  ) {
+    return NextResponse.redirect(new URL("/seller/signup", request.url));
+  }
+
+  // Nếu người dùng chua dang nhap thi chuyen huong ve trang login
+  if (privateSellerPaths.some((path) => pathname.startsWith(path)) && !sessionToken) {
+    return NextResponse.redirect(new URL("/Authentication/Login", request.url));
   }
 
   //nếu người dùng ko có role seller ko được vào trang dashboard

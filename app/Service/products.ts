@@ -6,4 +6,12 @@ const GetAllProductsMyCategory = async (id: number) => {
 const GetByProductId = async (id: number) => {
   return await axiosClient.get(`/products/by/${id}`);
 };
-export { GetAllProductsMyCategory, GetByProductId };
+
+const GetAllProductsMySeller = async (id: number) => {
+  return await axiosClient.get(`/products/myseller/${id}`);
+};
+
+const GetTop5ViewProducts = async () => {
+  return await axiosClient.get(`/products/topview`);
+};
+export { GetAllProductsMyCategory, GetByProductId, GetTop5ViewProducts, GetAllProductsMySeller };

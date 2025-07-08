@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type dataProduct = {
+  views: number;
   sku: string;
   id: number;
   title: string;
@@ -52,6 +53,7 @@ export default function DetailsPage() {
     });
     router.push(`/collections/product?${query}`);
   };
+
   const handleGetProduct = () => {
     GetAllProductsMyCategory(Number(id))
       .then((res) => {
@@ -100,6 +102,7 @@ export default function DetailsPage() {
                 onClick={() => handlePushDetailProduct(item.id, item.title)}
               >
                 <ProductItem
+                  views={item.views}
                   discount={item.discount}
                   price={item.price}
                   title={item.title}

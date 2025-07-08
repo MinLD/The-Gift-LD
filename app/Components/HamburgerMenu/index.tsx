@@ -34,6 +34,7 @@ function HamburgerMenu() {
     }
     if (id === 2) {
       router.push("/accounts/settings");
+      setIsOpenMenu(false);
     }
     if (id === 3) {
       await DeleteCookie();
@@ -41,21 +42,22 @@ function HamburgerMenu() {
       Cookies.remove("roles");
       Cookies.remove("SessionToken");
       router.push("/Authentication/Login");
+      setIsOpenMenu(false);
     }
   };
 
   const data = [
     {
       id: 1,
-      name: "Profile",
+      name: "Thông tin cá nhân",
     },
     {
       id: 2,
-      name: "Settings",
+      name: "Cài đặt",
     },
     {
       id: 3,
-      name: "Log out",
+      name: "Đăng xuất",
     },
   ];
   return (
@@ -74,9 +76,10 @@ function HamburgerMenu() {
         <div className=" w-[80vw] left-0 h-screen bg-[#ffffff] ">
           <div>
             <div
-              className="pt-2 px-5 relative "
+              className="pt-2 px-5 pt-5 relative "
               onClick={() => {
                 router.push("/");
+                setIsOpenMenu(false);
               }}
             >
               <Image
@@ -133,25 +136,28 @@ function HamburgerMenu() {
 
             <div
               className=" hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2  rounded-xl"
-              onClick={() => router.push("/")}
+              onClick={() => {
+                router.push("/");
+                setIsOpenMenu(false);
+              }}
             >
-              Shop
+              Cửa hàng
             </div>
-            <div className="hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2 rounded-xl relative">
-              <span
-                className="relative"
-                onClick={() => router.push("/accounts/orthers")}
-              >
-                Orthers
-                <div className="absolute w-full left-0 bottom-0 h-[1px] bg-[#333333]" />
-              </span>
+            <div
+              className="hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2 rounded-xl relative"
+              onClick={() => {
+                router.push("/accounts/orthers");
+                setIsOpenMenu(false);
+              }}
+            >
+              <span className="relative">Đơn hàng</span>
             </div>
 
-            <div className="overflow-y-scroll  max-h-[400px]">
+            <div className="overflow-y-scroll  max-h-[400px] ">
               {data.map((item) => (
                 <div
                   key={item.id}
-                  className="hover:bg-[#f5f5f5] px-3 py-2 rounded-xl mt-3 hover:cursor-pointer"
+                  className="hover:bg-[#f5f5f5] px-3 py-2 rounded-xl  hover:cursor-pointer"
                   onClick={() => handleReturnComponent(item.id)}
                 >
                   {item.name}
@@ -159,11 +165,11 @@ function HamburgerMenu() {
               ))}
             </div>
 
-            <div className="w-full h-[1px] bg-[#f1f1f1] mt-2" />
-            <p className="text-center mt-2 ">
+            {/* <div className="w-full h-[1px] bg-[#f1f1f1] mt-2" /> */}
+            {/* <p className="text-center mt-2">
               <span className="text-[#272727] font-bold ">Allbirds</span> &copy;
               2025
-            </p>
+            </p> */}
           </div>
         </div>
       </div>

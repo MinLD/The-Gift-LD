@@ -45,29 +45,23 @@ function HeaderOrthers() {
   };
 
   return (
-    <div className="bg-[#ffffff] h-[87px] w-full flex items-center justify-center">
+    <div className="bg-[#ffffff] h-[70px] w-full flex items-center justify-center">
       <div className="mx-auto w-[92vw] lg:w-[75vw] xl:w-[80vw] ">
         <div className=" flex  justify-between items-center ">
           <div
             className="sm:hidden w-[68px] md:w-[112px] hover:cursor-pointer"
             onClick={() => setIsOpenMenu(true)}
           >
-            <Menu size={32} strokeWidth={2.25} />
+            <Menu size={22} strokeWidth={2.25} />
           </div>
           <div className="flex gap-5 justify-center items-center">
             <div
-              className=""
+              className="text-xl hover:cursor-pointer  px-3 py-2 rounded-xl"
               onClick={() => {
                 router.push("/");
               }}
             >
-              <Image
-                className="LTODq"
-                width="112"
-                height="59"
-                src="https://cdn.shopify.com/s/files/1/1104/4168/files/Allbirds.Logo.Black.RGB.Large_112x112.png?v=1613734536.webp"
-                alt="Allbirds logo"
-              />
+              The Gift LD
             </div>
             <div
               className="hidden sm:block hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2  rounded-xl"
@@ -85,7 +79,7 @@ function HeaderOrthers() {
               </span>
             </div>
           </div>
-          <div className="sm:hidden"></div>
+          <div className="sm:hidden w-[68px] md:w-[112px] "></div>
 
           <div
             className="hidden hover:cursor-pointer hover:bg-[#f5f5f5] px-3 py-2 rounded-xl text-[#333333] sm:flex gap-1 justify-center items-center relative"

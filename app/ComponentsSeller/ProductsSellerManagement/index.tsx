@@ -7,8 +7,9 @@ import SellerEditProducts from "@/app/ComponentsSeller/SellerEditProducts";
 
 import { GetAllCategories } from "@/app/Service/Admin";
 import { DeleteProduct, GetMyProducts } from "@/app/Service/Seller";
+import { useProfileStore } from "@/app/zustand/store";
 
-import { Check, CirclePlus, Plus, Search } from "lucide-react";
+import { Check, Search } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -51,42 +52,15 @@ type dataProduct = {
     }[];
   }[];
 };
-type classification = {
-  name: string;
-  data: {
-    name: string;
-    price: number;
-    image: File | null;
-    quantity: number;
-  }[];
-};
+
 function ProductsSellerManagement() {
-  const dataDetails = [
-    { id: 0, name: "trademark", label: "Thương hiệu" },
-    { id: 1, name: "origin", label: "Xuất xứ" },
-    { id: 2, name: "style", label: "Kiểu dáng" },
-    { id: 3, name: "material", label: "Vật liệu" },
-  ];
-
-  const titleTable = [
-    { id: 0, name: "ID" },
-    { id: 1, name: "TIÊU ĐỀ" },
-    { id: 2, name: "MÔ TẢ" },
-    { id: 3, name: "HÌNH ẢNH" },
-    { id: 4, name: "THƯƠNG HIỆU" },
-    { id: 5, name: "KIỂU DÁNG" },
-    { id: 6, name: "CHẤT LIỆU" },
-    { id: 7, name: "XUẤT XỨ" },
-    { id: 8, name: "GIÁ" },
-    { id: 9, name: "SỐ LƯỢNG" },
-  ];
-
   const [data, setData] = useState<DataCategories>([]);
   const [Categories, setCategories] = useState<number>(16);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [form, setForm] = useState<dataProduct[]>([]);
   const [isDelete, setIsDelete] = useState<number>(-1);
   const [EditProfile, setEditProfile] = useState<number>(-1);
+  const { User } = useProfileStore();
 
   const handleGetAllCategories = async () => {
     setLoading(true);
@@ -121,7 +95,7 @@ function ProductsSellerManagement() {
   };
 
   const handleGetAllProducts = async () => {
-    GetMyProducts(Categories)
+    GetMyProducts(User?.seller?.id || 0, Categories)
       .then((res) => {
         setForm(res?.data?.result);
         console.log(res);

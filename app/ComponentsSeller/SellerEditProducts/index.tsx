@@ -1,15 +1,11 @@
 import LoaddingBox from "@/app/Components/BoxLoadding";
-import { CreateCategories, UpdateCategories } from "@/app/Service/Admin";
 import {
-  CreateAddress,
+
   PatchProduct,
-  UpdateAddress,
-  UpdateSeller,
+
 } from "@/app/Service/Seller";
 
-import { updateMyInfo } from "@/app/Service/User";
-import { useProfileStore } from "@/app/zustand/store";
-import { Camera, X } from "lucide-react";
+import {  X } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
@@ -50,7 +46,7 @@ type Props = {
 function SellerEditProducts({
   setClose,
   data: {
-    sku,
+    
     id,
     title,
     description,
@@ -61,7 +57,7 @@ function SellerEditProducts({
     material,
     quantity,
     images,
-    attributes,
+ 
   },
 }: Props) {
   const inputs = [

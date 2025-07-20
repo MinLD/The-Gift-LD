@@ -16,6 +16,7 @@ import { toast } from "sonner";
 function AddressSellerManagement() {
   const { User, fetchProfile } = useProfileStore();
   const [isLoading, setLoading] = useState<boolean>(true);
+  console.log(isLoading);
   const [ConfirmDelete, setConfirmDelete] = useState<number>(-1);
   const [EditProfile, setEditProfile] = useState<number>(-1);
   const [AddAddress, setAddAddress] = useState<boolean>(false);
@@ -185,8 +186,6 @@ const Form = ({
   defaultt = false,
   name = "",
   value,
-  details = "",
-  isType,
 }: {
   defaultt?: boolean;
   name?: string;

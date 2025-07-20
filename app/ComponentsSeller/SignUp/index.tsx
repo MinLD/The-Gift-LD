@@ -284,8 +284,9 @@ function SignUpSeller() {
   return (
     <div className="bg-[#f6f6f6] w-full h-screen p-5">
       <MyLayOut>
-        <div className="w-full bg-[#ffffff] h-auto p-5">
-          <div className="flex justify-center gap-2">
+        <div className="w-full bg-[#ffffff] h-auto px-2 ">
+          {/* Step XL*/}
+          <div className="hidden lg:flex justify-center gap-2 pt-10 mb-20">
             {data.map((i, k) => (
               <div
                 key={i.id}
@@ -313,22 +314,46 @@ function SignUpSeller() {
               </div>
             ))}
           </div>
-          <div className="w-full bg-[#f2f2f2] h-[1px] mt-20 " />
-          <form onSubmit={formik.handleSubmit}>
-            <div className="mt-10 px-50">{handleReturnForm()}</div>
-            {step < 3 && (
-              <>
-                <div className="w-full bg-[#f2f2f2] h-[1px] mt-10 " />
-                <button className="mt-3 bg-[#39523f] w-[100px] h-10 text-[#ffffff] rounded-md left-4/5 relative hover:cursor-pointer">
-                  {isLoading ? (
-                    <LoaddingBox isAVT width="10" height="10" />
-                  ) : (
-                    "Tiếp tục"
-                  )}
-                </button>
-              </>
-            )}
-          </form>
+
+          <div className="w-full bg-[#f2f2f2] h-[1px]  " />
+          <div className="flex gap-2 md:justify-between flex-col">
+            <div className="px-2 mt-5 ">
+              <h2 className="font-bold text-[20px]">The Gift LD Việt Nam</h2>
+            </div>
+            {/* step mobile */}
+            <div className="lg:hidden space-y-5 px-2 mt-5">
+              {data.map((i, k) => (
+                <h2
+                  key={k}
+                  className={`${
+                    step === i.id
+                      ? "text-[#39523f] font-bold"
+                      : "text-[#272727]"
+                  }`}
+                >
+                  {i.name}
+                </h2>
+              ))}
+            </div>
+          </div>
+          {/* Thông tin */}
+          <div className="flex gap-2">
+            <form onSubmit={formik.handleSubmit} className="w-full flex-1 mx-3">
+              <div className="mt-8">{handleReturnForm()}</div>
+              {step < 3 && (
+                <>
+                  <div className="w-full bg-[#f2f2f2] h-[1px] mt-10 " />
+                  <button className="mt-3 mb-5 bg-[#39523f] w-[100px] h-10 text-[#ffffff] rounded-md left-4/5 relative hover:cursor-pointer">
+                    {isLoading ? (
+                      <LoaddingBox isAVT width="10" height="10" />
+                    ) : (
+                      "Tiếp tục"
+                    )}
+                  </button>
+                </>
+              )}
+            </form>
+          </div>
         </div>
       </MyLayOut>
     </div>

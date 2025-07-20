@@ -2,14 +2,13 @@
 
 import ModalConfirm from "@/app/Components/ModalConfirm";
 import AdminCreateCategories from "@/app/ComponentsOrthers/AdminCreateCategories";
-import AdminCreateUser from "@/app/ComponentsOrthers/AdminCreateUser";
 import CategoriesEdit from "@/app/ComponentsOrthers/CategoriesEdit";
 
 import {
   DeleteCategories,
-  DeleteUsers,
+
   GetAllCategories,
-  GetAllUsers,
+
 } from "@/app/Service/Admin";
 import Image from "next/image";
 import { useEffect, useState } from "react";

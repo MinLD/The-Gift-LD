@@ -22,7 +22,7 @@ interface Address {
   isType: string;
   id: number;
 }
-[];
+[] as any;
 interface Cart {
   items: {
     products_order: {
@@ -52,37 +52,37 @@ interface Cart {
     unitPrice: number;
   }[];
 }
-interface dataProduct {
-  views: number;
-  sku: string;
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  category: number;
-  trademark: string;
-  origin: string;
-  style: string;
-  material: string;
-  discount: number;
-  quantity: number;
-  images: {
-    url: string | null;
-  }[];
-  attributes: {
-    name: string;
-    id: string;
-    attributesValues: {
-      name: string;
-      id: string;
-      price: number;
-      quantity: number;
-      image: {
-        url: string | null;
-      };
-    }[];
-  }[];
-}
+// interface dataProduct {
+//   views: number;
+//   sku: string;
+//   id: number;
+//   title: string;
+//   description: string;
+//   price: number;
+//   category: number;
+//   trademark: string;
+//   origin: string;
+//   style: string;
+//   material: string;
+//   discount: number;
+//   quantity: number;
+//   images: {
+//     url: string | null;
+//   }[];
+//   attributes: {
+//     name: string;
+//     id: string;
+//     attributesValues: {
+//       name: string;
+//       id: string;
+//       price: number;
+//       quantity: number;
+//       image: {
+//         url: string | null;
+//       };
+//     }[];
+//   }[];
+// }
 
 interface User {
   id: string;

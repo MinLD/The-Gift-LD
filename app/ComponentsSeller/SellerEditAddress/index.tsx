@@ -1,15 +1,15 @@
 import LoaddingBox from "@/app/Components/BoxLoadding";
-import { CreateCategories, UpdateCategories } from "@/app/Service/Admin";
+
 import {
-  CreateAddress,
+
   UpdateAddress,
-  UpdateSeller,
+
 } from "@/app/Service/Seller";
 
-import { updateMyInfo } from "@/app/Service/User";
+
 import { useProfileStore } from "@/app/zustand/store";
-import { Camera, X } from "lucide-react";
-import Image from "next/image";
+import {  X } from "lucide-react";
+
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 

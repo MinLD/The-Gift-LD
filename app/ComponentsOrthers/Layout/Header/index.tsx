@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp, CircleUserRound, Menu } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Cookies from "js-cookie";
-import Image from "next/image";
+
 import { useStateStore } from "@/app/Context/StoreProvider";
 
 function HeaderOrthers() {

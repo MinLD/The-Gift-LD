@@ -1,7 +1,6 @@
 "use client";
 
 import LoaddingBox from "@/app/Components/BoxLoadding";
-import LoadingOverlay from "@/app/Components/LoaddingOverlay";
 import { GetAllCategories } from "@/app/Service/Admin";
 import {
   CreateAttributesValue,
@@ -47,6 +46,7 @@ type classification = {
 };
 function CreateProductsSellerManagement() {
   const [isOpenClassification, setIsOpenClassification] = useState<number>(0);
+  console.log(isOpenClassification);
   const [classification, setClassification] = useState<classification[]>([
     {
       name: "",
@@ -353,7 +353,7 @@ function CreateProductsSellerManagement() {
               }
             } catch (err: any) {
               try {
-                const deleres = await DeleteProduct(productId);
+                await DeleteProduct(productId);
               } catch (deleteErr: any) {
                 toast.error(
                   "Lỗi khi xóa sản phẩm: " + deleteErr?.response?.data?.message
@@ -585,8 +585,8 @@ function CreateProductsSellerManagement() {
           <div className="mt-5 w-full h-[1px] bg-[#c5c5c5]" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-5 w-full">
-            {dataDetails.map((item) => (
-              <div className="">
+            {dataDetails.map((item, k) => (
+              <div className="" key={k}>
                 <div key={item.id} className="flex gap-2 mt-5 flex-col ">
                   <p className="text-[14px] text-[#c5c5c5] w-[100px] ">
                     {item.label}

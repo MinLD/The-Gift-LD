@@ -137,7 +137,7 @@ function Category({ title, description = "", type = "category" }: Props) {
 
   return (
     <div className="p-1">
-      <h2 className="text-[25px] sm:text-[30px] font-bold xl:text-[47px] text-[#272727] mt-10 text-left">
+      <h2 className="text-[25px] sm:text-[30px] font-bold xl:text-[47px] text-[#272727] mt-20 text-left">
         {title}
       </h2>
       <h2 className="text-[12px] sm:text-[15px] xl:text-[17px] text-[#272727] mt-2 text-left max-w-[900px]">
@@ -175,7 +175,7 @@ function Category({ title, description = "", type = "category" }: Props) {
         )}
         <div
           ref={scrollRef}
-          className="grid gap-[16px] overflow-x-auto auto-cols-[calc(100%/2-11px)] sm:auto-cols-[calc(100%/3-11px)] lg:auto-cols-[calc(100%/4-11px)] xl:auto-cols-[calc(100%/5-11px)]"
+          className=" grid gap-[16px] overflow-x-auto auto-cols-[calc(100%/2-11px)] sm:auto-cols-[calc(100%/3-11px)] lg:auto-cols-[calc(100%/4-11px)] xl:auto-cols-[calc(100%/5-11px)]"
           style={{
             gridAutoFlow: "column",
             scrollbarWidth: "none",

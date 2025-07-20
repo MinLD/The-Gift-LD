@@ -2,7 +2,7 @@
 import ShowProductInCart from "@/app/Components/ShowProductInCart";
 import { GetOrderById } from "@/app/Service/Order";
 import { Check, ChevronDown, CornerDownLeft } from "lucide-react";
-import Image from "next/image";
+
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 type Order = {

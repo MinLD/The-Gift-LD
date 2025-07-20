@@ -134,6 +134,7 @@ function SignIn({ isType = "login" }: Props) {
               console.log(err);
               toast.error("Password is incorrect.");
               setIsLoading(false);
+
               return;
             } else if (err.response?.data?.code === 1004) {
               toast.error("Email is incorrect.");

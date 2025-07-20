@@ -1,12 +1,9 @@
 import LoaddingBox from "@/app/Components/BoxLoadding";
-import { CreateCategories, UpdateCategories } from "@/app/Service/Admin";
-import { UpdateSeller } from "@/app/Service/Seller";
+import { CreateCategories } from "@/app/Service/Admin";
 
-import { updateMyInfo } from "@/app/Service/User";
-import { useProfileStore } from "@/app/zustand/store";
 import { Camera, X } from "lucide-react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 type Props = {

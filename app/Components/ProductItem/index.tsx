@@ -15,7 +15,7 @@ function ProductItem({
   image2,
   title,
   price,
-  discount,
+
   sku,
   views,
 }: props) {
@@ -66,7 +66,7 @@ function ProductItem({
         </div>
       </div>
       <div className="w-full h-[150px] flex flex-col gap-2 mt-3">
-        <h3 className="text-lg font-semibold line-clamp-2 h-[50px]">{title}</h3>
+        <h3 className="text-lg font-semibold line-clamp-1 h-[auto]">{title}</h3>
         <div className="flex items-center gap-2">
           <p className="text-[#F15D2F]">
             {typeof price === "number" ? price.toLocaleString() + "đ" : "N/A"}
@@ -78,6 +78,7 @@ function ProductItem({
           </p>
         </div>
       </div>
+  
     </div>
   );
 }

@@ -57,11 +57,7 @@ const DataIcons = [
     name: Bell,
     label: "Thông Báo",
   },
-  {
-    id: 4,
-    name: Languages,
-    label: "Tiếng việt",
-  },
+
   {
     id: 1,
     name: User,
@@ -70,7 +66,7 @@ const DataIcons = [
 
 const dataHeader = [
   { id: 0, name: "Hotline: 0918 607 139" },
-  { id: 1, name: "Email: hopevn@gmail.com" },
+  { id: 1, name: "Email: TheGiftLD@gmail.com" },
   { id: 2, name: "Miễn phí vận chuyển cho hóa đơn trên 500.000đ" },
 ];
 

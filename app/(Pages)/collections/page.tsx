@@ -1,7 +1,7 @@
 "use client";
 import ProductItem from "@/app/Components/ProductItem";
 import { GetAllProductsMyCategory } from "@/app/Service/products";
-import { ChevronDown, SlidersHorizontal } from "lucide-react";
+import { ChevronDown,  SlidersHorizontal } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -39,12 +39,10 @@ type dataProduct = {
 
 export default function DetailsPage() {
   const searchParams = useSearchParams();
+
   const id = searchParams.get("aa") || "Không có ID";
   const name = searchParams.get("bb") || "Không có tên";
   const description = searchParams.get("cc") || "Không có mô tả";
-  const [products, setProducts] = useState<dataProduct[]>([]);
-  const router = useRouter();
-
   const handlePushDetailProduct = (id_Product: number, title: string) => {
     const query = new URLSearchParams({
       aa: id_Product.toString(),
@@ -53,7 +51,6 @@ export default function DetailsPage() {
     });
     router.push(`/collections/product?${query}`);
   };
-
   const handleGetProduct = () => {
     GetAllProductsMyCategory(Number(id))
       .then((res) => {
@@ -61,11 +58,14 @@ export default function DetailsPage() {
       })
       .catch((err) => console.log(err));
   };
-
   useEffect(() => {
     handleGetProduct();
   }, []);
-  console.log(products);
+
+  const [products, setProducts] = useState<dataProduct[]>([]);
+  const router = useRouter();
+
+  
 
   return (
     <div className="mt-15  min-h-screen">
@@ -74,6 +74,7 @@ export default function DetailsPage() {
         {description} Khám phá những sản phẩm chơi cao cấp, được yêu thích nhờ
         thiết kế tinh tế, chế tác thủ công tỉ mỉ và chất liệu bền vững.
       </h2>
+
       <div className="flex gap-10 px-[5vw] mt-25">
         <div className="w-[20vw] space-y-5">
           <div className="flex gap-2 items-center">

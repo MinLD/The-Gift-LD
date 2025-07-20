@@ -7,7 +7,7 @@ function HeaderSeller() {
       <MyLayOut>
         <div className="flex justify-between items-center">
           <div className="flex gap-2 justify-center items-center">
-            <div className="flex items-center justify-center w-[100px] h-[70px]">
+            <div className="flex items-center justify-center w-[60px] h-[70px]">
               <Image
                 src={logo.src}
                 alt="logo"
@@ -16,11 +16,14 @@ function HeaderSeller() {
                 height={45}
               />
             </div>
-            <h2 className="text-[20px]  text-[#39523f]">
-              Đăng ký trở thành Người bán TheCraftLD
-            </h2>
+            <div className="flex flex-col">
+              <h2 className="text-[12px] sm:text-[14px] text-[#39523f]">Đăng ký bán hàng</h2>
+              <h2 className="text-[10px] sm:text-[12px] font-bold text-[#39523f] text-center">
+                TheCraftLD
+              </h2>
+            </div>
           </div>
-          <p className="text-[#39523f]">Bạn cần giúp đỡ?</p>
+          <p className="text-[#39523f] text-[12px] sm:text-[14px]">Bạn cần giúp đỡ?</p>
         </div>
       </MyLayOut>
     </div>

@@ -1,14 +1,8 @@
 "use client";
-import LoaddingBox from "@/app/Components/BoxLoadding";
-import LoadingOverlay from "@/app/Components/LoaddingOverlay";
-import ModalConfirm from "@/app/Components/ModalConfirm";
-import AdminCreateUser from "@/app/ComponentsOrthers/AdminCreateUser";
-import ProfileEdit from "@/app/ComponentsOrthers/ProfileEdit";
 import ProfileSellerEdit from "@/app/ComponentsOrthers/ProfileSellerEdit";
-import { DeleteUsers, GetAllUsers } from "@/app/Service/Admin";
+import {  GetAllUsers } from "@/app/Service/Admin";
 import { useProfileStore } from "@/app/zustand/store";
 import {
-  Code,
   Key,
   Mail,
   Phone,
@@ -17,8 +11,8 @@ import {
   User2,
 } from "lucide-react";
 import Image from "next/image";
-import { use, useEffect, useState } from "react";
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
+
 
 type DataUser = {
   id: string;
@@ -50,7 +44,7 @@ type DataUser = {
 }[];
 
 function AccountSellerManagement() {
-  const { User, fetchProfile } = useProfileStore();
+  const { User } = useProfileStore();
   const titleTable = [
     {
       id: 0,
@@ -90,9 +84,14 @@ function AccountSellerManagement() {
     },
   ];
   const [data, setData] = useState<DataUser>([]);
+  console.log(data);
   const [isEditProfile, setIsEditProfile] = useState<number>(-1);
+  console.log(isEditProfile);
   const [isLoading, setLoading] = useState<boolean>(true);
+  console.log(isLoading);
   const [ConfirmDelete, setConfirmDelete] = useState<string>("");
+  console.log(ConfirmDelete);
+  setConfirmDelete("");
   const [EditProfile, setEditProfile] = useState<boolean>(false);
 
   const handleGetAllUsers = () => {
@@ -108,20 +107,20 @@ function AccountSellerManagement() {
       });
   };
 
-  const handleDeleteUser = () => {
-    setLoading(true);
-    DeleteUsers(ConfirmDelete)
-      .then(() => {
-        toast.success("Xóa người dùng thành công");
-        handleGetAllUsers();
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(err.response.data.message);
-        setLoading(false);
-      });
-  };
+  // const handleDeleteUser = () => {
+  //   setLoading(true);
+  //   DeleteUsers(ConfirmDelete)
+  //     .then(() => {
+  //       toast.success("Xóa người dùng thành công");
+  //       handleGetAllUsers();
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       toast.error(err.response.data.message);
+  //       setLoading(false);
+  //     });
+  // };
   useEffect(() => {
     handleGetAllUsers();
   }, []);

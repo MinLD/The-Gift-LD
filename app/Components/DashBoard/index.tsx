@@ -1,10 +1,6 @@
 "use client";
 import HeaderDashBoard from "@/app/Components/LayoutDashBoard/HeaderDashBoard";
 import Sibar from "@/app/Components/Sibar";
-import DashBoardManagementAdmin from "@/app/ComponentsAdmin/DashBoardManagement";
-import CategoriesManagement from "@/app/ComponentsAdmin/ProductsManagement";
-import UsersManagement from "@/app/ComponentsAdmin/UsersManagement";
-import { useSidebar } from "@/app/zustand/sidebar";
 
 import React, { useState } from "react";
 

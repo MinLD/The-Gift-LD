@@ -97,8 +97,9 @@ export default function CheckoutForm() {
               ></path>
             </svg>
             <p className="px-15 text-center">
-              Sau khi nhấp vào "Thanh toán ngay", bạn sẽ được chuyển hướng đến
-              Payoo để hoàn tất giao dịch mua hàng của mình một cách an toàn.
+              Sau khi nhấp vào {" Thanh toán ngay "}, bạn sẽ được chuyển hướng
+              đến Payoo để hoàn tất giao dịch mua hàng của mình một cách an
+              toàn.
             </p>
           </div>
           <label className="flex items-center p-4 border border-gray-200 rounded-md bg-gray-50 hover:bg-gray-100 cursor-pointer">

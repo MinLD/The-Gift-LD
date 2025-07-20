@@ -90,9 +90,9 @@ function ProductsSellerManagement() {
     handleGetAllCategories();
     // Cleanup URLs khi component unmount
   }, []);
-  const handleShowLength = (e: string) => {
-    return e.length;
-  };
+  // const handleShowLength = (e: string) => {
+  //   return e.length;
+  // };
 
   const handleGetAllProducts = async () => {
     GetMyProducts(User?.seller?.id || 0, Categories)
@@ -180,8 +180,8 @@ function ProductsSellerManagement() {
                   />
                 </div>
 
-                {form.map((i) => (
-                  <div key={i.id}>
+                {form.map((i, k) => (
+                  <div key={k}>
                     {" "}
                     <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md mb-10">
                       <tbody>
@@ -218,7 +218,7 @@ function ProductsSellerManagement() {
                               <div className="flex flex-wrap gap-5">
                                 {i.images && i.images.length > 0 ? (
                                   i.images.map((img, index) => (
-                                    <div>
+                                    <div key={index}>
                                       {" "}
                                       <Image
                                         width={100}

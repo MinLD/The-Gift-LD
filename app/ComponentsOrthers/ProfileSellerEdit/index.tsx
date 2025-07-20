@@ -1,7 +1,5 @@
 import LoaddingBox from "@/app/Components/BoxLoadding";
 import { UpdateSeller } from "@/app/Service/Seller";
-
-import { updateMyInfo } from "@/app/Service/User";
 import { useProfileStore } from "@/app/zustand/store";
 import { Camera, X } from "lucide-react";
 import Image from "next/image";

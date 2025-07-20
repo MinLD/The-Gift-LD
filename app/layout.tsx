@@ -46,7 +46,7 @@ export default function RootLayout({
       fetchProfile();
       fetchCart();
     }
-  }, []);
+  }, [] as const);
 
   return (
     <html lang="vi" className={roboto.className}>
